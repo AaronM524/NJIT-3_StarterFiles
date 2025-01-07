@@ -20,6 +20,7 @@
 // FOR STEP 16, ADD THREE OF YOUR OWN FAVORITE MOVIES WITH METADATA TO THE END OF THE JSON FILE LIST
 */
 
+
 const vue_app = Vue.createApp({
       // This automatically imports your movies.json file and puts it into
       //   the variable: movies
@@ -32,15 +33,35 @@ const vue_app = Vue.createApp({
         return {
             // This holds your movies.json data.
             movies: [],
-            
             /* ADD ADDITIONAL VARIABLES FOR STEP 3 HERE */
-            title: "IMDB + Aaron's Top 8 Movies", 
-            owner: "Aaron", 
-            github: "https://github.com/AaronM524" 
-        }
-      },
+            title: "IMDB + Aaron's Top 8 Movies",
+            owner: "Aaron Mathew",
+            github: "https://github.com/AaronM524"
+            
+      }
+    },
       methods: {
             /* ADD FUNCTIONS/METHODS FOR STEP 7 HERE */
+            getMonthText(dateArray) {
+                  const months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                  const [year, month, day] = dateArray;
+                  return `${months[month - 1]} ${day}, ${year}`;
+            },
+            like(index){
+                  this.movies[index].likes++;
+            },
+            dislike(index){
+                  this.movies[index].dislikes++;
+            },
+            posterClick(index){
+                  const movie = this.movies[index];
+                  movie.posterindex = (movie.posterindex + 1) % movie.posters.length;            
+            },
+            timeText(minutes){
+                  const hours = Math.trunc(minutes / 60)
+                  const mins = minutes % 60
+                  return `${hours}h ${mins}m`
+            },
       }
 })
 
